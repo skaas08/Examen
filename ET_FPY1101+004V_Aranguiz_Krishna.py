@@ -38,7 +38,7 @@ def busqueda_precio(p_min, p_max):
 
 def actualizar_precio(modelo, p):
     if modelo in stock:
-        stock[modelo_consultado][0] = p
+        stock[modelo][0] = p
         return True
     else:
         return False
@@ -70,6 +70,10 @@ def main():
                         print("¡Precio actualizado!")
                     else:
                         print("¡El modelo no existe!")
+
+                    respuesta = input("¿Desea actualizar otro precio (s/n)?: ")
+                    if respuesta.lower() != 's':
+                        break
             elif opcion == 4:
                 print("Programa finalizado")
                 break
