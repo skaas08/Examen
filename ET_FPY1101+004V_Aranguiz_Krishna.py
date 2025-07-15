@@ -30,11 +30,19 @@ def stock_marca(marca):
 def busqueda_precio(p_min, p_max):
     prod_encontrados = []
     for precio in stock:
-        print(precio)
-        if (stock[precio][0] >= p_max or stock[precio][0] <= p_min) and stock[precio][0] <= 0:
-            prod_encontrados.append({"Marca": productos[0], "Modelo": precio})
+        if (stock[precio][0] <= p_max or stock[precio][0] >= p_min) and stock[precio][1] > 0:
+            print(precio)
+            prod_encontrados.append(precio)
     prod_encontrados.sort()
     print(prod_encontrados)
+
+def actualizar_precio(modelo, p):
+    if modelo in stock:
+        stock[modelo_consultado][0] = p
+        return True
+    else:
+        return False
+
 
 def main():
     while True:
@@ -49,7 +57,19 @@ def main():
                 p_max = int(input("Ingrese precio mínimo: "))
                 busqueda_precio(p_min, p_max)
             elif opcion == 3:
-                print("")
+                while True:
+                    modelo = input("Ingrese modelo a actualizar: ")
+                    try:
+                        p = int(input("Ingrese precio nuevo: "))
+                    except ValueError:
+                        print("¡Debe ingresar valores enteros!")
+                        continue
+
+                    cambio = actualizar_precio(modelo, p)
+                    if cambio:
+                        print("¡Precio actualizado!")
+                    else:
+                        print("¡El modelo no existe!")
             elif opcion == 4:
                 print("Programa finalizado")
                 break
